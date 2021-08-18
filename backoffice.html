@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
+    <title>Back Office</title>
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-link active" href="home.html">Home</a>
+            <a class="nav-link" href="">Backoffice<span class="sr-only">(current)</span></a>
+          </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="text-center">HEEYAAHEEHAAYAAA</h2>
+                <form>
+
+                    <div class="name my-2">
+                        <label for="name"></label>
+                        <input type="text" id="name" required>
+                    </div>
+
+                    <div class="brand my-2">
+                        <label for="brand"></label>
+                        <textarea id="brand" required></textarea>
+                    </div>
+
+                    <div class="description my-2">
+                        <label for="description"></label>
+                        <textarea id="description" required></textarea>
+                    </div>
+
+                    <div class="imageUrl my-2">
+                        <label for="imageUrl"></label>
+                        <input type="text" id="imageUrl" required>
+                    </div>
+
+                    <div class="price my-2">
+                        <label for="price"></label>
+                        <input type="text" id="price" required>
+                    </div>
+
+                    <button type="submit" class="my-2" id="btn">Submit</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+    
+    <script>
+         const btn = document.getElementById("btn")
+
+            const objectToPost = () => {
+                let obj = {}
+                obj.name = document.getElementById('name').value,
+                obj.brand = document.getElementById('brand').value,
+                obj.description = document.getElementById('description').value,
+                obj.imageUrl =  document.getElementById('imageUrl').value,
+                obj.price =document.getElementById('price').value
+                return JSON.stringify(obj)
+            }
+
+            console.log(objectToPost())
+            const formHandler = async () => {
+           
+            let products = objectToPost()
+            const response = await fetch('https://striveschool-api.herokuapp.com/api/product/', {
+                method: 'POST',
+                body: products,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTFjZmJmMDJkNTI2MjAwMTViNmRjYWEiLCJpYXQiOjE2MjkyODk0NTcsImV4cCI6MTYzMDQ5OTA1N30.c4LkfNB6rjrjb8CftjHXtIuN8dTOeKShcvX7e6WrfL4'
+                }
+            })
+    
+            if(response.ok) {
+                const resJson = await response.json()
+                console.log(resJson)
+                alert('YEEEEE')
+            } else {
+                console.log('nope')
+            }
+        }
+
+        btn.addEventListener("click", (e) => {
+            e.preventDefault()
+            formHandler()
+        })
+        
+       
+        
+        
+
+
+    </script>
+</body>
+</html>
+
+<!--
+          
+            You are building the new Amazon.
+            This time you are also responsible for the back office.
+            THIS is you CRUD endpoint
+            https://striveschool-api.herokuapp.com/api/product/
+            The product model is 
+            {
+                "_id": "5d318e1a8541744830bef139", //SERVER GENERATED
+                "name": "app test 1",  //REQUIRED
+                "description": "somthing longer", //REQUIRED
+                "brand": "nokia", //REQUIRED
+                "imageUrl": "https://drop.ndtv.com/TECH/product_database/images/2152017124957PM_635_nokia_3310.jpeg?downsize=*:420&output-quality=80", //REQUIRED
+                "price": 100, //REQUIRED
+                "userId": "admin", //SERVER GENERATED
+                "createdAt": "2019-07-19T09:32:10.535Z", //SERVER GENERATED
+                "updatedAt": "2019-07-19T09:32:10.535Z", //SERVER GENERATED
+                "__v": 0 //SERVER GENERATED
+            }
+            #---------------------------------------------------------------#
+            EVERY REST API CALL SHOULD BE AUTHENTICATED. 
+            Every request to the API should use Token Based Authentication to secure access to the contents.
+            You can get your token by registering on: strive.school/studentlogin
+            Authorization: Bearer ###########
+            Where ######### is the access_token returned by the endpoint.
+            #---------------------------------------------------------------#
+            Today you have to implement:
+            - A backoffice page, where you can insert the product by specifying the parameters
+            - A front page, where the user can see the available products
+            ------ N.B. ------
+            Tokens duration is set to 14 days. Whenever you'll need to obtain a new one you can send the following request:
+            
+            POST https://striveschool-api.herokuapp.com/api/account/login
+            {
+                "username": "testusername@yourmail.com",
+                "password":"pass"
+            }   
+        -->
+
+<!-- <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=CeT4NsfJ3kZ08cByPVD_6QwM2zKHVsjp0Qe-3hB8bmgRv3IRxztAWOMsK8hL7SuVb7Fv4rSVLOv5mVGlAkzJB3hz6AAgVBpchPmLphYfROTLZn0y33qgjGHewNziiCkN0O9VuzvprgJypv34pwAifK2fxfqPCATkeusAiLDo32oF7jjkxFLbVFK0fpwVknC_iXWKVviHDtBkIzHiWX6TceYOaCqcGzejE1lMQtsPIyvziWBObwW9qGz3wRQqd3X9dXVMVIZVyIP9kdkS17A0Y8Maiz5X41W82AGQoxBGnzeWK8BeznRtNR3p0KhNtGCoJpiKKbttCafftPuWujOJUAwCGAiAp0A5eYiF9Ms7iEv1b4aOzyqVAnJR0A4ULuKK4Kkd0_S8gLAFd1y_Cb60Hm5xMHfAaWhREuV-jhTsWdUUEJBtX--HrfcUBGD4h9LtAvbkpyEpt74zDnRjdKT9pqXZAYnUFuj2AF5WChCJNR6cznnqNnHDQjoVpTw65BRISBc_tCqO3aLW-MDnwgfCmPQxRJy6QlZp5wC_ehkQiGq3PTOqW8C5t7idnZ_DppFta10A4nSM6f3ANyxUFvu4i7Rhs1fGWfDkbqblfbvSH1c" charset="UTF-8"></script></head> -->
