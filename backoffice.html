@@ -1,28 +1,31 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 
     <title>Back Office</title>
-  </head>
+</head>
 
-  <body>
+<body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav">
-            <a class="nav-link active" href="home.html">Home</a>
-            <a class="nav-link" href="">Backoffice<span class="sr-only">(current)</span></a>
-          </div>
+            <div class="navbar-nav">
+                <a class="nav-link active" href="home.html">Home</a>
+                <a class="nav-link" href="">Backoffice<span class="sr-only">(current)</span></a>
+            </div>
         </div>
     </nav>
 
@@ -30,7 +33,7 @@
         <div class="row">
             <div class="col-md-6">
                 <h2 class="text-center">HEEYAAHEEHAAYAAA</h2>
-                <form>
+                <form onsubmit="formHandler(event)">
 
                     <div class="name my-2">
                         <label for="name"></label>
@@ -54,52 +57,59 @@
 
                     <div class="price my-2">
                         <label for="price"></label>
-                        <input type="text" id="price" required>
+                        <input type="number" id="price" required>
                     </div>
 
-                    <button type="submit" class="my-2" id="btn">Submit</button>
+                    <button type="submit" class="my-2" id="submit-btn">Submit</button>
 
                 </form>
             </div>
         </div>
     </div>
-    
-    
 
 
 
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
-    
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+        integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
+        crossorigin="anonymous"></script>
+
     <script>
-         const btn = document.getElementById("btn")
+        const btn = document.getElementById("submit-btn")
 
-            const objectToPost = () => {
-                let obj = {}
-                obj.name = document.getElementById('name').value,
-                obj.brand = document.getElementById('brand').value,
-                obj.description = document.getElementById('description').value,
-                obj.imageUrl =  document.getElementById('imageUrl').value,
-                obj.price =document.getElementById('price').value
-                return JSON.stringify(obj)
+
+        const formHandler = async (event) => {
+
+            event.preventDefault()
+
+            const objectToPost = {
+
+                name: document.getElementById('name').value,
+                brand: document.getElementById('brand').value,
+                description: document.getElementById('description').value,
+                imageUrl: document.getElementById('imageUrl').value,
+                price: document.getElementById('price').value
+
             }
 
-            console.log(objectToPost())
-            const formHandler = async () => {
-           
-            let products = objectToPost()
             const response = await fetch('https://striveschool-api.herokuapp.com/api/product/', {
                 method: 'POST',
-                body: products,
+                body: JSON.stringify(objectToPost),
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTFjZmJmMDJkNTI2MjAwMTViNmRjYWEiLCJpYXQiOjE2MjkyODk0NTcsImV4cCI6MTYzMDQ5OTA1N30.c4LkfNB6rjrjb8CftjHXtIuN8dTOeKShcvX7e6WrfL4'
                 }
             })
-    
-            if(response.ok) {
+
+            if (response.ok) {
                 const resJson = await response.json()
                 console.log(resJson)
                 alert('YEEEEE')
@@ -108,18 +118,14 @@
             }
         }
 
-        btn.addEventListener("click", (e) => {
-            e.preventDefault()
-            formHandler()
-        })
-        
-       
-        
-        
+
+
+
 
 
     </script>
 </body>
+
 </html>
 
 <!--
