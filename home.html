@@ -26,8 +26,10 @@
       </div>
     </nav>
 
-    <div class="container">
-      <h1>Hello, world!</h1>
+    <div class="container mt-5 mb-5">
+      <div id="showcase" class="row">
+      
+      </div>
 
     </div>
     
@@ -37,9 +39,48 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
     
     <script>
-      const getData = async () => {
-        const data = await fetch()
-      }
+     const url = 'https://striveschool-api.herokuapp.com/api/product/'
+     const showcase = document.getElementById('showcase')
+     let products = []
+
+     fetch(url, {
+       method: 'GET',
+       headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTFjZmJmMDJkNTI2MjAwMTViNmRjYWEiLCJpYXQiOjE2MjkyODk0NTcsImV4cCI6MTYzMDQ5OTA1N30.c4LkfNB6rjrjb8CftjHXtIuN8dTOeKShcvX7e6WrfL4'
+       }
+     })
+     .then(response => response.json())
+     .then(jsonResponse => {
+      //  products = jsonResponse
+        console.log('The products are: ', products)
+        displayData(jsonResponse)
+      // return products
+     })
+
+     const displayData = (data) => {
+        console.log('Products from displayData: ', data)
+      data.forEach(element => {
+       showcase.innerHTML += `
+       <div class="col-12 col-md-3">
+          <div class="card">
+            <img src=${element.imageUrl} class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Product: ${element.name}</h5>
+              <p class="card-text">Description: ${element.brand}</p>
+              <p class="card-text">Description: ${element.description}</p>
+              <p class="card-text">Price: ${element.price}</p>
+              <a href="#" class="btn btn-primary">Button</a>
+            </div>
+          </div>
+        </div>` 
+     });
+   }
+    
+
+     window.onload = () => {
+      // displayData(products)
+     }
     </script>
   
   </body>

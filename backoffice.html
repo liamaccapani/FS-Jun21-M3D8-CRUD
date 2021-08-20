@@ -60,7 +60,9 @@
                         <input type="number" id="price" required>
                     </div>
 
-                    <button type="submit" class="my-2" id="submit-btn">Submit</button>
+                    <button id="submit-btn" type="submit" class="my-2 btn-light">Submit</button>
+
+                    
 
                 </form>
             </div>
@@ -84,7 +86,6 @@
 
     <script>
         const btn = document.getElementById("submit-btn")
-
 
         const formHandler = async (event) => {
 
@@ -112,6 +113,8 @@
             if (response.ok) {
                 const resJson = await response.json()
                 console.log(resJson)
+
+                
                 alert('YEEEEE')
             } else {
                 console.log('nope')
