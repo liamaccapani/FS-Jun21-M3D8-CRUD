@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;700&family=Roboto&display=swap');
+
+:root {
+    --blue: rgb(19, 25, 33);
+    --yellow: rgb(243, 168, 71);
+    --grey: rgb(234, 237, 237);
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--grey);
+}
+
+.navbar {
+    background-color: var(--blue);
+}
+
+.submit--btn {
+    background-color: var(--yellow);
+}

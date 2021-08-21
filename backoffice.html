@@ -10,12 +10,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
         integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="style.css">
     <title>Back Office</title>
 </head>
 
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <a class="navbar-brand" href="#">Navbar</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,8 +24,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-link active" href="home.html">Home</a>
-                <a class="nav-link" href="">Backoffice<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="homepage.html">Home</a>
+                <a class="nav-link active" href="">Backoffice<span class="sr-only">(current)</span></a>
             </div>
         </div>
     </nav>
@@ -32,38 +33,34 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <h2 class="text-center">HEEYAAHEEHAAYAAA</h2>
+                <h2 class="py-3">Backoffice</h2>
                 <form onsubmit="formHandler(event)">
-
-                    <div class="name my-2">
-                        <label for="name"></label>
-                        <input type="text" id="name" required>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input id="name" type="text" class="form-control" placeholder="Name" required>
                     </div>
 
-                    <div class="brand my-2">
-                        <label for="brand"></label>
-                        <textarea id="brand" required></textarea>
+                    <div class="form-group">
+                        <label for="brand">Brand</label>
+                        <input id="brand" type="text" class="form-control" placeholder="Brand" required>
                     </div>
 
-                    <div class="description my-2">
-                        <label for="description"></label>
-                        <textarea id="description" required></textarea>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea id="description" type="text" class="form-control" rows="3" placeholder="Description" required></textarea>
                     </div>
 
-                    <div class="imageUrl my-2">
-                        <label for="imageUrl"></label>
-                        <input type="text" id="imageUrl" required>
+                    <div class="form-group">
+                        <label for="imageUrl">Image</label>
+                        <input id="imageUrl" type="text" class="form-control" placeholder="image" required>
                     </div>
 
-                    <div class="price my-2">
-                        <label for="price"></label>
-                        <input type="number" id="price" required>
-                    </div>
-
-                    <button id="submit-btn" type="submit" class="my-2 btn-light">Submit</button>
-
+                    <div class="form-group">
+                        <label for="price">Price</label>
+                        <input id="price" type="number" class="form-control" placeholder="Price" required>
+                    </div> 
                     
-
+                    <button type="submit" class="btn submit--btn">Submit</button>
                 </form>
             </div>
         </div>
@@ -84,49 +81,7 @@
         integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
         crossorigin="anonymous"></script>
 
-    <script>
-        const btn = document.getElementById("submit-btn")
-
-        const formHandler = async (event) => {
-
-            event.preventDefault()
-
-            const objectToPost = {
-
-                name: document.getElementById('name').value,
-                brand: document.getElementById('brand').value,
-                description: document.getElementById('description').value,
-                imageUrl: document.getElementById('imageUrl').value,
-                price: document.getElementById('price').value
-
-            }
-
-            const response = await fetch('https://striveschool-api.herokuapp.com/api/product/', {
-                method: 'POST',
-                body: JSON.stringify(objectToPost),
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTFjZmJmMDJkNTI2MjAwMTViNmRjYWEiLCJpYXQiOjE2MjkyODk0NTcsImV4cCI6MTYzMDQ5OTA1N30.c4LkfNB6rjrjb8CftjHXtIuN8dTOeKShcvX7e6WrfL4'
-                }
-            })
-
-            if (response.ok) {
-                const resJson = await response.json()
-                console.log(resJson)
-
-                
-                alert('YEEEEE')
-            } else {
-                console.log('nope')
-            }
-        }
-
-
-
-
-
-
-    </script>
+    <script src="backoffice.js"></script>
 </body>
 
 </html>
