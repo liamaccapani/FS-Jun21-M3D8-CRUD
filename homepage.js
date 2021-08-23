@@ -10,10 +10,10 @@ const url = 'https://striveschool-api.herokuapp.com/api/product/'
 const showcase = document.getElementById('showcase')
 
 //Function to fetch data from a given url
-const getData = async (urlParam) => {
+const getData = async (urlParameter) => {
     //If error in try, we fall in catch block, and other lines can continue (otherwise everything freezes and exits)
     try {
-        const response = await fetch(urlParam, {
+        const response = await fetch(urlParameter, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -33,6 +33,8 @@ const getData = async (urlParam) => {
 
 //Function to display events (dom manip) -> no need for async here, because I'm not dealing with fetched data (see window.onload)
 const displayProducts = (array) => {
+    const spinner = document.querySelector('.spinner-border')
+    spinner.classList.add('d-none')
     array.forEach(element => {
         showcase.innerHTML += `
         <div class="row">
@@ -45,6 +47,7 @@ const displayProducts = (array) => {
                 <p>${element.description}</p>
               </div>
               <div class="price">${element.price}</div>
+              <a id="edit--btn" class="btn edit--btn" href="backoffice.html?id=${element._id}">EDIT</a>
             </div>
           </div> 
         </div>`

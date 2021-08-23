@@ -16,6 +16,7 @@ body {
     background-color: var(--blue);
 }
 
-.submit--btn {
+#submit--btn,
+.edit--btn {
     background-color: var(--yellow);
 }
